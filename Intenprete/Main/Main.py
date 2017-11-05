@@ -1,13 +1,8 @@
-'''
-Created on 23-10-2017
-
-@author: Admin
-'''
+import analizadorLexico
+import analizadorSintactico
 
 if __name__ == '__main__':
     pass
 
-print("hola")
-print("k haze")
-print("negraaaaaaaaaaaaaaaaa bastarda")
-print("negraaaaaaaaaaaaaaaaa bastarda")
+#analizadorLexico.test()
+analizadorSintactico.test()
