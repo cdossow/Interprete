@@ -215,7 +215,7 @@ def buscarFicheros(directorio):
 	return files[int(numArchivo)-1]
 
 def test():
-	directorio = 'E:/Workspace/git/Compilador_PL0/analizador version 2/test/'
+	directorio = os.getcwd()+'/test/'
 	archivo = buscarFicheros(directorio)
 	test = directorio+archivo
 	fp = codecs.open(test,"r","utf-8")

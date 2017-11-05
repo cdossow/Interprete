@@ -227,7 +227,7 @@ class Parser:
         # If no lexer was given, we will try to use the lex module
         if not lexer:
             import lex
-            lexer = lex.Lexer()
+            lexer = lex.lexer
         
         # Set up the lexer and parser objects on pslice
         pslice.lexer = lexer
@@ -532,7 +532,7 @@ class Parser:
         # If no lexer was given, we will try to use the lex module
         if not lexer:
             import lex
-            lexer = lex.Lexer()
+            lexer = lex.lexer
         
         # Set up the lexer and parser objects on pslice
         pslice.lexer = lexer
@@ -806,7 +806,7 @@ class Parser:
         # If no lexer was given, we will try to use the lex module
         if not lexer:
             import lex
-            lexer = lex.Lexer()
+            lexer = lex.lexer
         
         # Set up the lexer and parser objects on pslice
         pslice.lexer = lexer

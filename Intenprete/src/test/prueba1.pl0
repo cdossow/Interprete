@@ -1,4 +1,4 @@
-CONST
+const
   m=7,
   n=85;
 
