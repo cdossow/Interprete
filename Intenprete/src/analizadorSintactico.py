@@ -33,8 +33,57 @@ def p_block2(p):
 	print "block (fact)"
 	
 def p_block3(p):
-	'''block : block block '''
+	'''block : grules '''
 	print "block 3"
+
+def p_block4(p):
+	'''block : block block '''
+	print "block 4"
+	
+def p_grules1(p):
+	'''grules : assing property directive DOT'''
+	#p[0] = constDecl(p[2])
+	print "grules 1"
+	
+def p_assing1(p):
+	'''assing : ASSIGN'''
+	#p[0] = constDecl(p[2])
+	print "assing 1"
+	
+def p_assing2(p):
+	'''assing : IS'''
+	#p[0] = constDecl(p[2])
+	print "assing 2"
+	
+def p_directive1(p):
+	'''directive : factname DIVIDE NUMBER'''
+	#p[0] = constDecl(p[2])
+	print "directive 1"
+	
+def p_directive2(p):
+	'''directive : directive COMMA directive'''
+	#p[0] = constDecl(p[2])
+	print "directive 2"
+	
+def p_property1(p):
+	'''property : DYNAMIC'''
+	#p[0] = constDecl(p[2])
+	print "property DYNAMIC"
+
+def p_property2(p):
+	'''property : PUBLIC'''
+	#p[0] = constDecl(p[2])
+	print "property PUBLIC"
+	
+def p_property3(p):
+	'''property : MULTIFILE'''
+	#p[0] = constDecl(p[2])
+	print "property MULTIFILE"
+	
+def p_property4(p):
+	'''property : DISCONTIGUOUS'''
+	#p[0] = constDecl(p[2])
+	print "property DISCONTIGUOUS"
 	
 def p_fact(p):
 	'''fact : factname LPARENT elements RPARENT DOT'''
@@ -56,6 +105,7 @@ def p_goal2(p):
 	#p[0] = constDecl(p[2])
 	print "goal 2"
 	
+	
 def p_goalrule1(p):
 	'''goalRule : factname LPARENT elements RPARENT'''
 	#p[0] = constDecl(p[2])
@@ -63,18 +113,57 @@ def p_goalrule1(p):
 	
 def p_goalrule2(p):
 	'''goalRule : element EQUALITY element'''
-	#p[0] = constDecl(p[2])
 	print "goalRule 2 (EQUALITY)"
 	
 def p_goalrule3(p):
 	'''goalRule : element INEQUALITY element'''
-	#p[0] = constDecl(p[2])
 	print "goalRule 3 (INEQUALITY)"
 	
-def p_factname(p):
+def p_goalrule4(p):
+	'''goalRule : element check element'''
+	print "goalRule 4 (check)"
+	
+def p_goalrule5(p):
+	'''goalRule : element assing goalRule'''
+	print "goalRule 5 (assing)"
+	
+def p_goalrule6(p):
+	'''goalRule : element operator element'''
+	print "goalRule 6 (operator)"
+	
+def p_operator1(p):
+	'''operator : MINUS'''
+	print "operator MINUS"
+	
+def p_operator2(p):
+	'''operator : PLUS'''
+	print "operator PLUS"
+	
+def p_operator3(p):
+	'''operator : TIMES'''
+	print "operator TIMES"
+
+def p_operator4(p):
+	'''operator : DIVIDE'''
+	print "operator DIVIDE"
+	
+def p_check1(p):
+	'''check : GTE'''
+	print "check 1"
+	
+def p_check2(p):
+	'''check : LT'''
+	print "check 2"
+	
+def p_check3(p):
+	'''check : GT'''
+	print "check 3"
+	
+def p_factname1(p):
 	'''factname : ID'''
-	#p[0] = constDecl(p[2])
-	print "factname"
+	print "factname ID"
+	
+
 	
 def p_elements1(p):
 	'''elements : elements COMMA elements'''
@@ -86,11 +175,14 @@ def p_elements2(p):
 	#p[0] = constDecl(p[2])
 	print "elements 2"
 	
-def p_element(p):
+def p_element1(p):
 	'''element : ID'''
 	#p[0] = constDecl(p[2])
-	print "element"
+	print "element ID"
 	
+def p_element2(p):
+	'''element : NUMBER'''
+	print "element NUMBER"
 
 def p_empty(p):
 	'''empty :'''
@@ -105,7 +197,7 @@ def buscarFicheros(directorio):
 	numArchivo = ''
 	respuesta = False
 	cont = 1
-
+	print "archivos de prueba:"
 	for base, dirs, files in os.walk(directorio):
 		ficheros.append(files)
 

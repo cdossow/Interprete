@@ -1,6 +1,9 @@
-shift/reduce conflict in state 8 resolved as shift.
-shift/reduce conflict in state 14 resolved as shift.
-shift/reduce conflict in state 27 resolved as shift.
+shift/reduce conflict in state 17 resolved as shift.
+shift/reduce conflict in state 17 resolved as shift.
+shift/reduce conflict in state 17 resolved as shift.
+shift/reduce conflict in state 29 resolved as shift.
+shift/reduce conflict in state 32 resolved as shift.
+shift/reduce conflict in state 54 resolved as shift.
 
 
 Unused terminals:
@@ -9,25 +12,17 @@ Unused terminals:
    CONST
    THEN
    SEMMICOLOM
-   NUMBER
+   VAR
    WHILE
-   MINUS
-   GTE
    BEGIN
    NE
-   LT
-   PLUS
    ODD
    OUT
-   GT
    END
-   DIVIDE
    UPDATE
-   TIMES
+   ELSE
    LTE
    IN
-   VAR
-   ELSE
    PROCEDURE
    IF
    CALL
@@ -37,53 +32,79 @@ Grammar
 Rule 1     program -> block
 Rule 2     block -> rule
 Rule 3     block -> fact
-Rule 4     block -> block block
-Rule 5     fact -> factname LPARENT elements RPARENT DOT
-Rule 6     rule -> factname LPARENT elements RPARENT ASSIGN goal DOT
-Rule 7     goal -> goal COMMA goal
-Rule 8     goal -> goalRule
-Rule 9     goalRule -> factname LPARENT elements RPARENT
-Rule 10    goalRule -> element EQUALITY element
-Rule 11    goalRule -> element INEQUALITY element
-Rule 12    factname -> ID
-Rule 13    elements -> elements COMMA elements
-Rule 14    elements -> element
-Rule 15    element -> ID
-Rule 16    empty -> <empty>
+Rule 4     block -> grules
+Rule 5     block -> block block
+Rule 6     grules -> assing property directive DOT
+Rule 7     assing -> ASSIGN
+Rule 8     assing -> IS
+Rule 9     directive -> factname DIVIDE NUMBER
+Rule 10    directive -> directive COMMA directive
+Rule 11    property -> DYNAMIC
+Rule 12    property -> PUBLIC
+Rule 13    property -> MULTIFILE
+Rule 14    property -> DISCONTIGUOUS
+Rule 15    fact -> factname LPARENT elements RPARENT DOT
+Rule 16    rule -> factname LPARENT elements RPARENT ASSIGN goal DOT
+Rule 17    goal -> goal COMMA goal
+Rule 18    goal -> goalRule
+Rule 19    goalRule -> factname LPARENT elements RPARENT
+Rule 20    goalRule -> element EQUALITY element
+Rule 21    goalRule -> element INEQUALITY element
+Rule 22    goalRule -> element check element
+Rule 23    goalRule -> element assing goalRule
+Rule 24    goalRule -> element operator element
+Rule 25    operator -> MINUS
+Rule 26    operator -> PLUS
+Rule 27    operator -> TIMES
+Rule 28    operator -> DIVIDE
+Rule 29    check -> GTE
+Rule 30    check -> LT
+Rule 31    check -> GT
+Rule 32    factname -> ID
+Rule 33    elements -> elements COMMA elements
+Rule 34    elements -> element
+Rule 35    element -> ID
+Rule 36    element -> NUMBER
+Rule 37    empty -> <empty>
 
 Terminals, with rules where they appear
 
-ASSIGN               : 6
+ASSIGN               : 7 16
 BEGIN                : 
 CALL                 : 
-COMMA                : 7 13
+COMMA                : 10 17 33
 CONST                : 
-DIVIDE               : 
+DISCONTIGUOUS        : 14
+DIVIDE               : 9 28
 DO                   : 
-DOT                  : 5 6
+DOT                  : 6 15 16
+DYNAMIC              : 11
 ELSE                 : 
 END                  : 
-EQUALITY             : 10
-GT                   : 
-GTE                  : 
-ID                   : 12 15
+EQUALITY             : 20
+GT                   : 31
+GTE                  : 29
+ID                   : 32 35
 IF                   : 
 IN                   : 
-INEQUALITY           : 11
-LPARENT              : 5 6 9
-LT                   : 
+INEQUALITY           : 21
+IS                   : 8
+LPARENT              : 15 16 19
+LT                   : 30
 LTE                  : 
-MINUS                : 
+MINUS                : 25
+MULTIFILE            : 13
 NE                   : 
-NUMBER               : 
+NUMBER               : 9 36
 ODD                  : 
 OUT                  : 
-PLUS                 : 
+PLUS                 : 26
 PROCEDURE            : 
-RPARENT              : 5 6 9
+PUBLIC               : 12
+RPARENT              : 15 16 19
 SEMMICOLOM           : 
 THEN                 : 
-TIMES                : 
+TIMES                : 27
 UPDATE               : 
 VAR                  : 
 WHILE                : 
@@ -91,15 +112,21 @@ error                :
 
 Nonterminals, with rules where they appear
 
-block                : 1 4 4
-element              : 10 10 11 11 14
-elements             : 5 6 9 13 13
+assing               : 6 23
+block                : 1 5 5
+check                : 22
+directive            : 6 10 10
+element              : 20 20 21 21 22 22 23 24 24 34
+elements             : 15 16 19 33 33
 empty                : 
 fact                 : 3
-factname             : 5 6 9
-goal                 : 6 7 7
-goalRule             : 8
+factname             : 9 15 16 19
+goal                 : 16 17 17
+goalRule             : 18 23
+grules               : 4
+operator             : 24
 program              : 0
+property             : 6
 rule                 : 2
 
 
@@ -112,365 +139,780 @@ state 0
     (1) program -> . block
     (2) block -> . rule
     (3) block -> . fact
-    (4) block -> . block block
-    (6) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
-    (5) fact -> . factname LPARENT elements RPARENT DOT
-    (12) factname -> . ID
+    (4) block -> . grules
+    (5) block -> . block block
+    (16) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
+    (15) fact -> . factname LPARENT elements RPARENT DOT
+    (6) grules -> . assing property directive DOT
+    (32) factname -> . ID
+    (7) assing -> . ASSIGN
+    (8) assing -> . IS
 
-    ID              shift and go to state 3
+    ID              shift and go to state 5
+    ASSIGN          shift and go to state 9
+    IS              shift and go to state 2
 
 
     factname                       shift and go to state 1
-    rule                           shift and go to state 2
-    program                        shift and go to state 4
-    block                          shift and go to state 5
-    fact                           shift and go to state 6
+    assing                         shift and go to state 3
+    rule                           shift and go to state 4
+    program                        shift and go to state 6
+    block                          shift and go to state 7
+    grules                         shift and go to state 8
+    fact                           shift and go to state 10
 
 state 1
 
-    (6) rule -> factname . LPARENT elements RPARENT ASSIGN goal DOT
-    (5) fact -> factname . LPARENT elements RPARENT DOT
+    (16) rule -> factname . LPARENT elements RPARENT ASSIGN goal DOT
+    (15) fact -> factname . LPARENT elements RPARENT DOT
 
-    LPARENT         shift and go to state 7
+    LPARENT         shift and go to state 11
 
 
 
 state 2
 
-    (2) block -> rule .
+    (8) assing -> IS .
 
-    ID              reduce using rule 2 (block -> rule .)
-    $end            reduce using rule 2 (block -> rule .)
+    DYNAMIC         reduce using rule 8 (assing -> IS .)
+    PUBLIC          reduce using rule 8 (assing -> IS .)
+    MULTIFILE       reduce using rule 8 (assing -> IS .)
+    DISCONTIGUOUS   reduce using rule 8 (assing -> IS .)
+    ID              reduce using rule 8 (assing -> IS .)
+    NUMBER          reduce using rule 8 (assing -> IS .)
 
 
 
 state 3
 
-    (12) factname -> ID .
+    (6) grules -> assing . property directive DOT
+    (11) property -> . DYNAMIC
+    (12) property -> . PUBLIC
+    (13) property -> . MULTIFILE
+    (14) property -> . DISCONTIGUOUS
 
-    LPARENT         reduce using rule 12 (factname -> ID .)
+    DYNAMIC         shift and go to state 12
+    PUBLIC          shift and go to state 16
+    MULTIFILE       shift and go to state 13
+    DISCONTIGUOUS   shift and go to state 14
 
 
+    property                       shift and go to state 15
 
 state 4
+
+    (2) block -> rule .
+
+    ID              reduce using rule 2 (block -> rule .)
+    ASSIGN          reduce using rule 2 (block -> rule .)
+    IS              reduce using rule 2 (block -> rule .)
+    $end            reduce using rule 2 (block -> rule .)
+
+
+
+state 5
+
+    (32) factname -> ID .
+
+    DIVIDE          reduce using rule 32 (factname -> ID .)
+    LPARENT         reduce using rule 32 (factname -> ID .)
+
+
+
+state 6
 
     (0) S' -> program .
 
 
 
 
-state 5
+state 7
 
     (1) program -> block .
-    (4) block -> block . block
+    (5) block -> block . block
     (2) block -> . rule
     (3) block -> . fact
-    (4) block -> . block block
-    (6) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
-    (5) fact -> . factname LPARENT elements RPARENT DOT
-    (12) factname -> . ID
+    (4) block -> . grules
+    (5) block -> . block block
+    (16) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
+    (15) fact -> . factname LPARENT elements RPARENT DOT
+    (6) grules -> . assing property directive DOT
+    (32) factname -> . ID
+    (7) assing -> . ASSIGN
+    (8) assing -> . IS
 
     $end            reduce using rule 1 (program -> block .)
-    ID              shift and go to state 3
+    ID              shift and go to state 5
+    ASSIGN          shift and go to state 9
+    IS              shift and go to state 2
 
 
     factname                       shift and go to state 1
-    rule                           shift and go to state 2
-    block                          shift and go to state 8
-    fact                           shift and go to state 6
-
-state 6
-
-    (3) block -> fact .
-
-    ID              reduce using rule 3 (block -> fact .)
-    $end            reduce using rule 3 (block -> fact .)
-
-
-
-state 7
-
-    (6) rule -> factname LPARENT . elements RPARENT ASSIGN goal DOT
-    (5) fact -> factname LPARENT . elements RPARENT DOT
-    (13) elements -> . elements COMMA elements
-    (14) elements -> . element
-    (15) element -> . ID
-
-    ID              shift and go to state 11
-
-
-    element                        shift and go to state 9
-    elements                       shift and go to state 10
+    assing                         shift and go to state 3
+    rule                           shift and go to state 4
+    block                          shift and go to state 17
+    grules                         shift and go to state 8
+    fact                           shift and go to state 10
 
 state 8
 
-    (4) block -> block block .
-    (4) block -> block . block
-    (2) block -> . rule
-    (3) block -> . fact
-    (4) block -> . block block
-    (6) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
-    (5) fact -> . factname LPARENT elements RPARENT DOT
-    (12) factname -> . ID
+    (4) block -> grules .
 
-  ! shift/reduce conflict for ID resolved as shift.
-    $end            reduce using rule 4 (block -> block block .)
-    ID              shift and go to state 3
+    ID              reduce using rule 4 (block -> grules .)
+    ASSIGN          reduce using rule 4 (block -> grules .)
+    IS              reduce using rule 4 (block -> grules .)
+    $end            reduce using rule 4 (block -> grules .)
 
-  ! ID              [ reduce using rule 4 (block -> block block .) ]
 
-    factname                       shift and go to state 1
-    rule                           shift and go to state 2
-    block                          shift and go to state 8
-    fact                           shift and go to state 6
 
 state 9
 
-    (14) elements -> element .
+    (7) assing -> ASSIGN .
 
-    RPARENT         reduce using rule 14 (elements -> element .)
-    COMMA           reduce using rule 14 (elements -> element .)
+    DYNAMIC         reduce using rule 7 (assing -> ASSIGN .)
+    PUBLIC          reduce using rule 7 (assing -> ASSIGN .)
+    MULTIFILE       reduce using rule 7 (assing -> ASSIGN .)
+    DISCONTIGUOUS   reduce using rule 7 (assing -> ASSIGN .)
+    ID              reduce using rule 7 (assing -> ASSIGN .)
+    NUMBER          reduce using rule 7 (assing -> ASSIGN .)
 
 
 
 state 10
 
-    (6) rule -> factname LPARENT elements . RPARENT ASSIGN goal DOT
-    (5) fact -> factname LPARENT elements . RPARENT DOT
-    (13) elements -> elements . COMMA elements
+    (3) block -> fact .
 
-    RPARENT         shift and go to state 13
-    COMMA           shift and go to state 12
+    ID              reduce using rule 3 (block -> fact .)
+    ASSIGN          reduce using rule 3 (block -> fact .)
+    IS              reduce using rule 3 (block -> fact .)
+    $end            reduce using rule 3 (block -> fact .)
 
 
 
 state 11
 
-    (15) element -> ID .
+    (16) rule -> factname LPARENT . elements RPARENT ASSIGN goal DOT
+    (15) fact -> factname LPARENT . elements RPARENT DOT
+    (33) elements -> . elements COMMA elements
+    (34) elements -> . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
 
-    DOT             reduce using rule 15 (element -> ID .)
-    COMMA           reduce using rule 15 (element -> ID .)
-    RPARENT         reduce using rule 15 (element -> ID .)
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
 
 
+    element                        shift and go to state 19
+    elements                       shift and go to state 20
 
 state 12
 
-    (13) elements -> elements COMMA . elements
-    (13) elements -> . elements COMMA elements
-    (14) elements -> . element
-    (15) element -> . ID
+    (11) property -> DYNAMIC .
 
-    ID              shift and go to state 11
+    ID              reduce using rule 11 (property -> DYNAMIC .)
 
 
-    elements                       shift and go to state 14
-    element                        shift and go to state 9
 
 state 13
 
-    (6) rule -> factname LPARENT elements RPARENT . ASSIGN goal DOT
-    (5) fact -> factname LPARENT elements RPARENT . DOT
+    (13) property -> MULTIFILE .
 
-    ASSIGN          shift and go to state 15
-    DOT             shift and go to state 16
+    ID              reduce using rule 13 (property -> MULTIFILE .)
 
 
 
 state 14
 
-    (13) elements -> elements COMMA elements .
-    (13) elements -> elements . COMMA elements
+    (14) property -> DISCONTIGUOUS .
 
-  ! shift/reduce conflict for COMMA resolved as shift.
-    RPARENT         reduce using rule 13 (elements -> elements COMMA elements .)
-    COMMA           shift and go to state 12
+    ID              reduce using rule 14 (property -> DISCONTIGUOUS .)
 
-  ! COMMA           [ reduce using rule 13 (elements -> elements COMMA elements .) ]
 
 
 state 15
 
-    (6) rule -> factname LPARENT elements RPARENT ASSIGN . goal DOT
-    (7) goal -> . goal COMMA goal
-    (8) goal -> . goalRule
-    (9) goalRule -> . factname LPARENT elements RPARENT
-    (10) goalRule -> . element EQUALITY element
-    (11) goalRule -> . element INEQUALITY element
-    (12) factname -> . ID
-    (15) element -> . ID
+    (6) grules -> assing property . directive DOT
+    (9) directive -> . factname DIVIDE NUMBER
+    (10) directive -> . directive COMMA directive
+    (32) factname -> . ID
 
-    ID              shift and go to state 21
+    ID              shift and go to state 5
 
 
-    element                        shift and go to state 19
-    goal                           shift and go to state 17
-    goalRule                       shift and go to state 20
-    factname                       shift and go to state 18
+    directive                      shift and go to state 22
+    factname                       shift and go to state 23
 
 state 16
 
-    (5) fact -> factname LPARENT elements RPARENT DOT .
+    (12) property -> PUBLIC .
 
-    ID              reduce using rule 5 (fact -> factname LPARENT elements RPARENT DOT .)
-    $end            reduce using rule 5 (fact -> factname LPARENT elements RPARENT DOT .)
+    ID              reduce using rule 12 (property -> PUBLIC .)
 
 
 
 state 17
 
-    (6) rule -> factname LPARENT elements RPARENT ASSIGN goal . DOT
-    (7) goal -> goal . COMMA goal
+    (5) block -> block block .
+    (5) block -> block . block
+    (2) block -> . rule
+    (3) block -> . fact
+    (4) block -> . grules
+    (5) block -> . block block
+    (16) rule -> . factname LPARENT elements RPARENT ASSIGN goal DOT
+    (15) fact -> . factname LPARENT elements RPARENT DOT
+    (6) grules -> . assing property directive DOT
+    (32) factname -> . ID
+    (7) assing -> . ASSIGN
+    (8) assing -> . IS
 
-    DOT             shift and go to state 23
-    COMMA           shift and go to state 22
+  ! shift/reduce conflict for ID resolved as shift.
+  ! shift/reduce conflict for ASSIGN resolved as shift.
+  ! shift/reduce conflict for IS resolved as shift.
+    $end            reduce using rule 5 (block -> block block .)
+    ID              shift and go to state 5
+    ASSIGN          shift and go to state 9
+    IS              shift and go to state 2
 
+  ! ID              [ reduce using rule 5 (block -> block block .) ]
+  ! ASSIGN          [ reduce using rule 5 (block -> block block .) ]
+  ! IS              [ reduce using rule 5 (block -> block block .) ]
 
+    factname                       shift and go to state 1
+    assing                         shift and go to state 3
+    rule                           shift and go to state 4
+    block                          shift and go to state 17
+    grules                         shift and go to state 8
+    fact                           shift and go to state 10
 
 state 18
 
-    (9) goalRule -> factname . LPARENT elements RPARENT
+    (36) element -> NUMBER .
 
-    LPARENT         shift and go to state 24
+    EQUALITY        reduce using rule 36 (element -> NUMBER .)
+    INEQUALITY      reduce using rule 36 (element -> NUMBER .)
+    GTE             reduce using rule 36 (element -> NUMBER .)
+    LT              reduce using rule 36 (element -> NUMBER .)
+    GT              reduce using rule 36 (element -> NUMBER .)
+    ASSIGN          reduce using rule 36 (element -> NUMBER .)
+    IS              reduce using rule 36 (element -> NUMBER .)
+    MINUS           reduce using rule 36 (element -> NUMBER .)
+    PLUS            reduce using rule 36 (element -> NUMBER .)
+    TIMES           reduce using rule 36 (element -> NUMBER .)
+    DIVIDE          reduce using rule 36 (element -> NUMBER .)
+    DOT             reduce using rule 36 (element -> NUMBER .)
+    COMMA           reduce using rule 36 (element -> NUMBER .)
+    RPARENT         reduce using rule 36 (element -> NUMBER .)
 
 
 
 state 19
 
-    (10) goalRule -> element . EQUALITY element
-    (11) goalRule -> element . INEQUALITY element
+    (34) elements -> element .
 
-    EQUALITY        shift and go to state 26
-    INEQUALITY      shift and go to state 25
+    RPARENT         reduce using rule 34 (elements -> element .)
+    COMMA           reduce using rule 34 (elements -> element .)
 
 
 
 state 20
 
-    (8) goal -> goalRule .
+    (16) rule -> factname LPARENT elements . RPARENT ASSIGN goal DOT
+    (15) fact -> factname LPARENT elements . RPARENT DOT
+    (33) elements -> elements . COMMA elements
 
-    COMMA           reduce using rule 8 (goal -> goalRule .)
-    DOT             reduce using rule 8 (goal -> goalRule .)
+    RPARENT         shift and go to state 25
+    COMMA           shift and go to state 24
 
 
 
 state 21
 
-    (12) factname -> ID .
-    (15) element -> ID .
+    (35) element -> ID .
 
-    LPARENT         reduce using rule 12 (factname -> ID .)
-    EQUALITY        reduce using rule 15 (element -> ID .)
-    INEQUALITY      reduce using rule 15 (element -> ID .)
+    DOT             reduce using rule 35 (element -> ID .)
+    COMMA           reduce using rule 35 (element -> ID .)
+    RPARENT         reduce using rule 35 (element -> ID .)
 
 
 
 state 22
 
-    (7) goal -> goal COMMA . goal
-    (7) goal -> . goal COMMA goal
-    (8) goal -> . goalRule
-    (9) goalRule -> . factname LPARENT elements RPARENT
-    (10) goalRule -> . element EQUALITY element
-    (11) goalRule -> . element INEQUALITY element
-    (12) factname -> . ID
-    (15) element -> . ID
+    (6) grules -> assing property directive . DOT
+    (10) directive -> directive . COMMA directive
 
-    ID              shift and go to state 21
+    DOT             shift and go to state 27
+    COMMA           shift and go to state 26
 
 
-    element                        shift and go to state 19
-    factname                       shift and go to state 18
-    goal                           shift and go to state 27
-    goalRule                       shift and go to state 20
 
 state 23
 
-    (6) rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .
+    (9) directive -> factname . DIVIDE NUMBER
 
-    ID              reduce using rule 6 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
-    $end            reduce using rule 6 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
+    DIVIDE          shift and go to state 28
 
 
 
 state 24
 
-    (9) goalRule -> factname LPARENT . elements RPARENT
-    (13) elements -> . elements COMMA elements
-    (14) elements -> . element
-    (15) element -> . ID
+    (33) elements -> elements COMMA . elements
+    (33) elements -> . elements COMMA elements
+    (34) elements -> . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
 
-    ID              shift and go to state 11
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
 
 
-    element                        shift and go to state 9
-    elements                       shift and go to state 28
+    elements                       shift and go to state 29
+    element                        shift and go to state 19
 
 state 25
 
-    (11) goalRule -> element INEQUALITY . element
-    (15) element -> . ID
+    (16) rule -> factname LPARENT elements RPARENT . ASSIGN goal DOT
+    (15) fact -> factname LPARENT elements RPARENT . DOT
 
-    ID              shift and go to state 11
+    ASSIGN          shift and go to state 30
+    DOT             shift and go to state 31
 
 
-    element                        shift and go to state 29
 
 state 26
 
-    (10) goalRule -> element EQUALITY . element
-    (15) element -> . ID
+    (10) directive -> directive COMMA . directive
+    (9) directive -> . factname DIVIDE NUMBER
+    (10) directive -> . directive COMMA directive
+    (32) factname -> . ID
 
-    ID              shift and go to state 11
+    ID              shift and go to state 5
 
 
-    element                        shift and go to state 30
+    directive                      shift and go to state 32
+    factname                       shift and go to state 23
 
 state 27
 
-    (7) goal -> goal COMMA goal .
-    (7) goal -> goal . COMMA goal
+    (6) grules -> assing property directive DOT .
 
-  ! shift/reduce conflict for COMMA resolved as shift.
-    DOT             reduce using rule 7 (goal -> goal COMMA goal .)
-    COMMA           shift and go to state 22
+    ID              reduce using rule 6 (grules -> assing property directive DOT .)
+    ASSIGN          reduce using rule 6 (grules -> assing property directive DOT .)
+    IS              reduce using rule 6 (grules -> assing property directive DOT .)
+    $end            reduce using rule 6 (grules -> assing property directive DOT .)
 
-  ! COMMA           [ reduce using rule 7 (goal -> goal COMMA goal .) ]
 
 
 state 28
 
-    (9) goalRule -> factname LPARENT elements . RPARENT
-    (13) elements -> elements . COMMA elements
+    (9) directive -> factname DIVIDE . NUMBER
 
-    RPARENT         shift and go to state 31
-    COMMA           shift and go to state 12
+    NUMBER          shift and go to state 33
 
 
 
 state 29
 
-    (11) goalRule -> element INEQUALITY element .
+    (33) elements -> elements COMMA elements .
+    (33) elements -> elements . COMMA elements
 
-    DOT             reduce using rule 11 (goalRule -> element INEQUALITY element .)
-    COMMA           reduce using rule 11 (goalRule -> element INEQUALITY element .)
+  ! shift/reduce conflict for COMMA resolved as shift.
+    RPARENT         reduce using rule 33 (elements -> elements COMMA elements .)
+    COMMA           shift and go to state 24
 
+  ! COMMA           [ reduce using rule 33 (elements -> elements COMMA elements .) ]
 
 
 state 30
 
-    (10) goalRule -> element EQUALITY element .
+    (16) rule -> factname LPARENT elements RPARENT ASSIGN . goal DOT
+    (17) goal -> . goal COMMA goal
+    (18) goal -> . goalRule
+    (19) goalRule -> . factname LPARENT elements RPARENT
+    (20) goalRule -> . element EQUALITY element
+    (21) goalRule -> . element INEQUALITY element
+    (22) goalRule -> . element check element
+    (23) goalRule -> . element assing goalRule
+    (24) goalRule -> . element operator element
+    (32) factname -> . ID
+    (35) element -> . ID
+    (36) element -> . NUMBER
 
-    DOT             reduce using rule 10 (goalRule -> element EQUALITY element .)
-    COMMA           reduce using rule 10 (goalRule -> element EQUALITY element .)
+    ID              shift and go to state 38
+    NUMBER          shift and go to state 18
 
 
+    goal                           shift and go to state 34
+    factname                       shift and go to state 35
+    element                        shift and go to state 36
+    goalRule                       shift and go to state 37
 
 state 31
 
-    (9) goalRule -> factname LPARENT elements RPARENT .
+    (15) fact -> factname LPARENT elements RPARENT DOT .
 
-    DOT             reduce using rule 9 (goalRule -> factname LPARENT elements RPARENT .)
-    COMMA           reduce using rule 9 (goalRule -> factname LPARENT elements RPARENT .)
+    ID              reduce using rule 15 (fact -> factname LPARENT elements RPARENT DOT .)
+    ASSIGN          reduce using rule 15 (fact -> factname LPARENT elements RPARENT DOT .)
+    IS              reduce using rule 15 (fact -> factname LPARENT elements RPARENT DOT .)
+    $end            reduce using rule 15 (fact -> factname LPARENT elements RPARENT DOT .)
+
+
+
+state 32
+
+    (10) directive -> directive COMMA directive .
+    (10) directive -> directive . COMMA directive
+
+  ! shift/reduce conflict for COMMA resolved as shift.
+    DOT             reduce using rule 10 (directive -> directive COMMA directive .)
+    COMMA           shift and go to state 26
+
+  ! COMMA           [ reduce using rule 10 (directive -> directive COMMA directive .) ]
+
+
+state 33
+
+    (9) directive -> factname DIVIDE NUMBER .
+
+    DOT             reduce using rule 9 (directive -> factname DIVIDE NUMBER .)
+    COMMA           reduce using rule 9 (directive -> factname DIVIDE NUMBER .)
+
+
+
+state 34
+
+    (16) rule -> factname LPARENT elements RPARENT ASSIGN goal . DOT
+    (17) goal -> goal . COMMA goal
+
+    DOT             shift and go to state 40
+    COMMA           shift and go to state 39
+
+
+
+state 35
+
+    (19) goalRule -> factname . LPARENT elements RPARENT
+
+    LPARENT         shift and go to state 41
+
+
+
+state 36
+
+    (20) goalRule -> element . EQUALITY element
+    (21) goalRule -> element . INEQUALITY element
+    (22) goalRule -> element . check element
+    (23) goalRule -> element . assing goalRule
+    (24) goalRule -> element . operator element
+    (29) check -> . GTE
+    (30) check -> . LT
+    (31) check -> . GT
+    (7) assing -> . ASSIGN
+    (8) assing -> . IS
+    (25) operator -> . MINUS
+    (26) operator -> . PLUS
+    (27) operator -> . TIMES
+    (28) operator -> . DIVIDE
+
+    EQUALITY        shift and go to state 43
+    INEQUALITY      shift and go to state 47
+    GTE             shift and go to state 44
+    LT              shift and go to state 46
+    GT              shift and go to state 42
+    ASSIGN          shift and go to state 9
+    IS              shift and go to state 2
+    MINUS           shift and go to state 51
+    PLUS            shift and go to state 48
+    TIMES           shift and go to state 50
+    DIVIDE          shift and go to state 53
+
+
+    operator                       shift and go to state 49
+    assing                         shift and go to state 45
+    check                          shift and go to state 52
+
+state 37
+
+    (18) goal -> goalRule .
+
+    COMMA           reduce using rule 18 (goal -> goalRule .)
+    DOT             reduce using rule 18 (goal -> goalRule .)
+
+
+
+state 38
+
+    (32) factname -> ID .
+    (35) element -> ID .
+
+    LPARENT         reduce using rule 32 (factname -> ID .)
+    EQUALITY        reduce using rule 35 (element -> ID .)
+    INEQUALITY      reduce using rule 35 (element -> ID .)
+    GTE             reduce using rule 35 (element -> ID .)
+    LT              reduce using rule 35 (element -> ID .)
+    GT              reduce using rule 35 (element -> ID .)
+    ASSIGN          reduce using rule 35 (element -> ID .)
+    IS              reduce using rule 35 (element -> ID .)
+    MINUS           reduce using rule 35 (element -> ID .)
+    PLUS            reduce using rule 35 (element -> ID .)
+    TIMES           reduce using rule 35 (element -> ID .)
+    DIVIDE          reduce using rule 35 (element -> ID .)
+
+
+
+state 39
+
+    (17) goal -> goal COMMA . goal
+    (17) goal -> . goal COMMA goal
+    (18) goal -> . goalRule
+    (19) goalRule -> . factname LPARENT elements RPARENT
+    (20) goalRule -> . element EQUALITY element
+    (21) goalRule -> . element INEQUALITY element
+    (22) goalRule -> . element check element
+    (23) goalRule -> . element assing goalRule
+    (24) goalRule -> . element operator element
+    (32) factname -> . ID
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 38
+    NUMBER          shift and go to state 18
+
+
+    goal                           shift and go to state 54
+    factname                       shift and go to state 35
+    element                        shift and go to state 36
+    goalRule                       shift and go to state 37
+
+state 40
+
+    (16) rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .
+
+    ID              reduce using rule 16 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
+    ASSIGN          reduce using rule 16 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
+    IS              reduce using rule 16 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
+    $end            reduce using rule 16 (rule -> factname LPARENT elements RPARENT ASSIGN goal DOT .)
+
+
+
+state 41
+
+    (19) goalRule -> factname LPARENT . elements RPARENT
+    (33) elements -> . elements COMMA elements
+    (34) elements -> . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
+
+
+    element                        shift and go to state 19
+    elements                       shift and go to state 55
+
+state 42
+
+    (31) check -> GT .
+
+    ID              reduce using rule 31 (check -> GT .)
+    NUMBER          reduce using rule 31 (check -> GT .)
+
+
+
+state 43
+
+    (20) goalRule -> element EQUALITY . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
+
+
+    element                        shift and go to state 56
+
+state 44
+
+    (29) check -> GTE .
+
+    ID              reduce using rule 29 (check -> GTE .)
+    NUMBER          reduce using rule 29 (check -> GTE .)
+
+
+
+state 45
+
+    (23) goalRule -> element assing . goalRule
+    (19) goalRule -> . factname LPARENT elements RPARENT
+    (20) goalRule -> . element EQUALITY element
+    (21) goalRule -> . element INEQUALITY element
+    (22) goalRule -> . element check element
+    (23) goalRule -> . element assing goalRule
+    (24) goalRule -> . element operator element
+    (32) factname -> . ID
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 38
+    NUMBER          shift and go to state 18
+
+
+    factname                       shift and go to state 35
+    element                        shift and go to state 36
+    goalRule                       shift and go to state 57
+
+state 46
+
+    (30) check -> LT .
+
+    ID              reduce using rule 30 (check -> LT .)
+    NUMBER          reduce using rule 30 (check -> LT .)
+
+
+
+state 47
+
+    (21) goalRule -> element INEQUALITY . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
+
+
+    element                        shift and go to state 58
+
+state 48
+
+    (26) operator -> PLUS .
+
+    ID              reduce using rule 26 (operator -> PLUS .)
+    NUMBER          reduce using rule 26 (operator -> PLUS .)
+
+
+
+state 49
+
+    (24) goalRule -> element operator . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
+
+
+    element                        shift and go to state 59
+
+state 50
+
+    (27) operator -> TIMES .
+
+    ID              reduce using rule 27 (operator -> TIMES .)
+    NUMBER          reduce using rule 27 (operator -> TIMES .)
+
+
+
+state 51
+
+    (25) operator -> MINUS .
+
+    ID              reduce using rule 25 (operator -> MINUS .)
+    NUMBER          reduce using rule 25 (operator -> MINUS .)
+
+
+
+state 52
+
+    (22) goalRule -> element check . element
+    (35) element -> . ID
+    (36) element -> . NUMBER
+
+    ID              shift and go to state 21
+    NUMBER          shift and go to state 18
+
+
+    element                        shift and go to state 60
+
+state 53
+
+    (28) operator -> DIVIDE .
+
+    ID              reduce using rule 28 (operator -> DIVIDE .)
+    NUMBER          reduce using rule 28 (operator -> DIVIDE .)
+
+
+
+state 54
+
+    (17) goal -> goal COMMA goal .
+    (17) goal -> goal . COMMA goal
+
+  ! shift/reduce conflict for COMMA resolved as shift.
+    DOT             reduce using rule 17 (goal -> goal COMMA goal .)
+    COMMA           shift and go to state 39
+
+  ! COMMA           [ reduce using rule 17 (goal -> goal COMMA goal .) ]
+
+
+state 55
+
+    (19) goalRule -> factname LPARENT elements . RPARENT
+    (33) elements -> elements . COMMA elements
+
+    RPARENT         shift and go to state 61
+    COMMA           shift and go to state 24
+
+
+
+state 56
+
+    (20) goalRule -> element EQUALITY element .
+
+    DOT             reduce using rule 20 (goalRule -> element EQUALITY element .)
+    COMMA           reduce using rule 20 (goalRule -> element EQUALITY element .)
+
+
+
+state 57
+
+    (23) goalRule -> element assing goalRule .
+
+    DOT             reduce using rule 23 (goalRule -> element assing goalRule .)
+    COMMA           reduce using rule 23 (goalRule -> element assing goalRule .)
+
+
+
+state 58
+
+    (21) goalRule -> element INEQUALITY element .
+
+    DOT             reduce using rule 21 (goalRule -> element INEQUALITY element .)
+    COMMA           reduce using rule 21 (goalRule -> element INEQUALITY element .)
+
+
+
+state 59
+
+    (24) goalRule -> element operator element .
+
+    DOT             reduce using rule 24 (goalRule -> element operator element .)
+    COMMA           reduce using rule 24 (goalRule -> element operator element .)
+
+
+
+state 60
+
+    (22) goalRule -> element check element .
+
+    DOT             reduce using rule 22 (goalRule -> element check element .)
+    COMMA           reduce using rule 22 (goalRule -> element check element .)
+
+
+
+state 61
+
+    (19) goalRule -> factname LPARENT elements RPARENT .
+
+    DOT             reduce using rule 19 (goalRule -> factname LPARENT elements RPARENT .)
+    COMMA           reduce using rule 19 (goalRule -> factname LPARENT elements RPARENT .)
 
 

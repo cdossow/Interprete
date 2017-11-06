@@ -1,3 +1,4 @@
+:- discontiguous male/1, female/1, parent/2.
 male(dicky).
 male(randy).
 male(mike).

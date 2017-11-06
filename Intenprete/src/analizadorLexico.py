@@ -5,7 +5,7 @@ import os
 import sys
 
 reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
-		'VAR','PROCEDURE','OUT','IN','ELSE'
+		'VAR','PROCEDURE','OUT','IN','ELSE','DYNAMIC','MULTIFILE','PUBLIC','DISCONTIGUOUS','IS'
 		]
 
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
@@ -55,6 +55,10 @@ t_DOT = r'\.'
 t_UPDATE = r':='
 t_EQUALITY = r'='
 t_INEQUALITY = r'\\='
+# t_DYNAMIC = r'dynamic'
+# t_MULTIFILE = r'multifile'
+# t_PUBLIC = r'public'
+# t_DISCONTIGUOUS = r'discontiguous'
 
 
 def t_ID(t):
@@ -90,7 +94,7 @@ def buscarFicheros(directorio):
 	numArchivo = ''
 	respuesta = False
 	cont = 1
-
+	print "archivos de prueba:"
 	for base, dirs, files in os.walk(directorio):
 		ficheros.append(files)
 
