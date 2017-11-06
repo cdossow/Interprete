@@ -5,13 +5,11 @@ import os
 import sys
 
 reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
-		'VAR','PROCEDURE','OUT','IN','ELSE','DYNAMIC','MULTIFILE','PUBLIC','DISCONTIGUOUS','IS'
-		]
+		'VAR','PROCEDURE','OUT','IN','ELSE','DYNAMIC','MULTIFILE','PUBLIC','DISCONTIGUOUS','IS']
 
-tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
-		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
+tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE','ASSIGN','NE','LT','LTE','GT','GTE',
 		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE','EQUALITY','INEQUALITY'
+		'DOT','UPDATE','EQUALITY','INEQUALITY','ODD'
 		]
 
 
@@ -40,8 +38,8 @@ t_PLUS = r'\+'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_ODD = r'ODD'
 t_ASSIGN = r':-'
+t_ODD = r'ODD'
 t_NE = r'<>'
 t_LT = r'<'
 t_LTE = r'<='
