@@ -11,7 +11,7 @@ reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
 		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE'
+		'DOT','UPDATE','EQUALITY','INEQUALITY'
 		]
 
 
@@ -41,7 +41,7 @@ t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_ODD = r'ODD'
-t_ASSIGN = r'='
+t_ASSIGN = r':-'
 t_NE = r'<>'
 t_LT = r'<'
 t_LTE = r'<='
@@ -53,6 +53,9 @@ t_COMMA = r','
 t_SEMMICOLOM = r';'
 t_DOT = r'\.'
 t_UPDATE = r':='
+t_EQUALITY = r'='
+t_INEQUALITY = r'\\='
+
 
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -64,10 +67,11 @@ def t_ID(t):
 	return t
 
 def t_newline(t):
-	r'\n+'
+	r'\n'
 	t.lexer.lineno += len(t.value)
+	print "New Line"
 
-#dsfjksdlgjklsdgjsdgslxcvjlk-,.
+
 def t_COMMENT(t):
 	r'\#.*'
 	pass
@@ -105,6 +109,8 @@ def buscarFicheros(directorio):
 
 	return files[int(numArchivo)-1]
 
+analizador = lex.lex()
+
 def test():
 	directorio = os.getcwd()+'/test/'
 	archivo = buscarFicheros(directorio)
@@ -113,14 +119,12 @@ def test():
 	cadena = fp.read()
 	fp.close()
 
-analizador = lex.lex()
+	analizador.input(cadena)
 
-#analizador.input(cadena)
-
-# while True:
-# 	tok = analizador.token()
-# 	if not tok : break
-# 	print tok
+	while True:
+		tok = analizador.token()
+		if not tok : break
+		print tok
 
 
 
